@@ -9,7 +9,7 @@ import {
   Plus,
   Smile,
   Bot,
-  UserCheck,
+  MessageSquarePlus,
 } from "lucide-react";
 import { MessageThread } from "@/types/android";
 import { sounds } from "@/utils/soundEffects";
@@ -38,15 +38,15 @@ export const MessagesApp: React.FC<MessagesAppProps> = ({
     setInputText("");
   };
 
-  const smartReplies = ["Sounds great! 👍", "I'm checking now.", "Can we talk later?", "Running tests on the emulator! 🚀"];
+  const smartReplies = ["Sounds great! 👍", "I'm on it.", "Talk to you soon!", "Running on Android 15! 🚀"];
 
   return (
     <div className="h-full w-full bg-zinc-950 text-white flex flex-col justify-between select-none">
       {/* If Inside a Thread */}
       {activeThread ? (
         <div className="h-full flex flex-col justify-between">
-          {/* Thread Header */}
-          <div className="p-3 pt-10 border-b border-white/10 bg-zinc-900/90 flex items-center justify-between">
+          {/* Thread Header (Pixel Style) */}
+          <div className="p-3 pt-8 border-b border-white/10 bg-zinc-900/90 flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => {
@@ -63,12 +63,12 @@ export const MessagesApp: React.FC<MessagesAppProps> = ({
                 {activeThread.contactName.includes("AI") ? <Bot className="w-5 h-5" /> : activeThread.contactName[0]}
               </div>
               <div className="flex flex-col">
-                <span className="text-sm font-semibold text-white leading-tight">
+                <span className="text-xs font-bold text-white leading-tight">
                   {activeThread.contactName}
                 </span>
-                <span className="text-[10px] text-emerald-400 font-medium flex items-center space-x-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Online (RCS Chat)</span>
+                <span className="text-[10px] text-blue-400 font-medium flex items-center space-x-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+                  <span>RCS Chat • End-to-end encrypted</span>
                 </span>
               </div>
             </div>
@@ -88,10 +88,10 @@ export const MessagesApp: React.FC<MessagesAppProps> = ({
                   className={`flex flex-col ${isMe ? "items-end" : "items-start"}`}
                 >
                   <div
-                    className={`max-w-[78%] px-4 py-2.5 rounded-2xl text-xs shadow-md leading-relaxed ${
+                    className={`max-w-[78%] px-4 py-2.5 rounded-3xl text-xs shadow-md leading-relaxed ${
                       isMe
-                        ? "bg-blue-600 text-white rounded-br-none"
-                        : "bg-zinc-800 text-zinc-100 rounded-bl-none border border-white/5"
+                        ? "bg-blue-600 text-white rounded-br-sm"
+                        : "bg-zinc-800 text-zinc-100 rounded-bl-sm border border-white/5"
                     }`}
                   >
                     {msg.text}
@@ -131,7 +131,7 @@ export const MessagesApp: React.FC<MessagesAppProps> = ({
               </button>
               <input
                 type="text"
-                placeholder="RCS message..."
+                placeholder="RCS message"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 className="bg-transparent border-none outline-none text-xs text-white placeholder-zinc-500 w-full"
@@ -148,34 +148,22 @@ export const MessagesApp: React.FC<MessagesAppProps> = ({
           </form>
         </div>
       ) : (
-        /* Conversation List */
-        <div className="h-full flex flex-col justify-between">
-          {/* Header */}
-          <div className="p-4 pt-10 border-b border-white/5 space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-lg font-bold tracking-tight text-blue-400">Messages</span>
-              <button
-                onClick={() => {
-                  sounds.playTap();
-                  if (threads[0]) setActiveThreadId(threads[0].id);
-                }}
-                className="p-2 rounded-full bg-blue-600/20 text-blue-400 hover:bg-blue-600/30"
-                title="Start Chat"
-              >
-                <Plus className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Search */}
-            <div className="flex items-center space-x-2 bg-zinc-900 rounded-full px-3.5 py-2 border border-white/5">
-              <Search className="w-4 h-4 text-zinc-500" />
+        /* Conversations List (Official Google Messages Style) */
+        <div className="h-full flex flex-col justify-between relative">
+          {/* Top Search Bar */}
+          <div className="p-3 pt-8 border-b border-white/5 space-y-2 bg-zinc-950">
+            <div className="flex items-center space-x-2 bg-zinc-900 rounded-full px-4 py-2.5 border border-white/10 shadow-sm">
+              <Search className="w-4 h-4 text-zinc-400" />
               <input
                 type="text"
-                placeholder="Search conversations..."
+                placeholder="Search conversations"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="bg-transparent border-none outline-none text-xs text-white placeholder-zinc-500 w-full"
+                className="bg-transparent border-none outline-none text-xs text-white placeholder-zinc-500 w-full font-medium"
               />
+              <div className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center">
+                A
+              </div>
             </div>
           </div>
 
@@ -226,8 +214,18 @@ export const MessagesApp: React.FC<MessagesAppProps> = ({
               })}
           </div>
 
-          <div className="p-3 text-center text-[11px] text-zinc-500 border-t border-white/5">
-            Encrypted with Android RCS Protocol
+          {/* Floating Action Button (FAB): "Start chat" */}
+          <div className="absolute right-4 bottom-4">
+            <button
+              onClick={() => {
+                sounds.playTap();
+                if (threads[0]) setActiveThreadId(threads[0].id);
+              }}
+              className="px-4 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-3xl font-bold text-xs flex items-center space-x-2 shadow-2xl active:scale-95 transition-all"
+            >
+              <MessageSquarePlus className="w-4 h-4" />
+              <span>Start chat</span>
+            </button>
           </div>
         </div>
       )}
