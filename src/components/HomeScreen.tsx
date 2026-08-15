@@ -88,7 +88,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           </div>
         </div>
 
-        {/* Official Google Search Bar Widget */}
+        {/* Official Google Search Bar Widget (Pixel Launcher Style) */}
         <form
           onSubmit={handleSearchSubmit}
           className="w-full bg-white/95 backdrop-blur-md rounded-full px-3.5 py-2.5 flex items-center justify-between shadow-xl text-zinc-900 group focus-within:bg-white transition-all"
@@ -101,7 +101,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             />
             <input
               type="text"
-              placeholder="Search or type URL"
+              placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="bg-transparent border-none outline-none text-xs text-zinc-800 placeholder-zinc-500 w-full font-medium"
@@ -187,7 +187,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               title={app.name}
             >
               <img
-                src={app.iconSrc}
+                src={app.id === "camera" ? "/img/icon/apps/sscamera.png" : app.iconSrc}
                 alt=""
                 className="w-full h-full object-contain"
               />
