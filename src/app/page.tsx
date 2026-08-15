@@ -25,7 +25,6 @@ import {
 import { sounds } from "@/utils/soundEffects";
 
 // System Components
-import { PhoneFrame } from "@/components/PhoneFrame";
 import { StatusBar } from "@/components/StatusBar";
 import { NavigationBar } from "@/components/NavigationBar";
 import { LockScreen } from "@/components/LockScreen";
@@ -35,7 +34,6 @@ import { NotificationShade } from "@/components/NotificationShade";
 import { RecentsView } from "@/components/RecentsView";
 import { VolumeHUD } from "@/components/VolumeHUD";
 import { PowerMenu } from "@/components/PowerMenu";
-import { DesktopControls } from "@/components/DesktopControls";
 
 // App Screens
 import { PhoneApp } from "@/components/apps/PhoneApp";
@@ -62,7 +60,6 @@ export default function AndroidEmulatorPage() {
   const [isLocked, setIsLocked] = useState<boolean>(false);
   const [activeAppId, setActiveAppId] = useState<AppId | null>(null);
   const [openApps, setOpenApps] = useState<AppId[]>([]);
-  const [isLandscape, setIsLandscape] = useState<boolean>(false);
 
   // Modals & Overlays State
   const [shadeOpen, setShadeOpen] = useState<boolean>(false);
@@ -190,8 +187,8 @@ export default function AndroidEmulatorPage() {
       setTimeout(() => {
         sounds.playNotification();
         const aiReplies = [
-          "I've processed your request. Everything on your Android device is performing optimally at 120Hz!",
-          "That's awesome, Anik! The Next.js 15 Android emulator is fully responsive and running at full speed.",
+          "I've processed your request. Everything on your Android device is performing optimally!",
+          "That's awesome, Anik! The Android emulator viewport is responsive and running smoothly.",
           "I can assist you with your RUET lab reports, app launching, or running commands in Termux!",
           "Got it! Let me know if you want to change the wallpaper, play 2048, or test the camera.",
         ];
@@ -361,159 +358,143 @@ export default function AndroidEmulatorPage() {
   };
 
   return (
-    <main className="w-full min-h-screen bg-zinc-950 flex flex-col lg:flex-row items-center justify-center p-0 sm:p-6 lg:space-x-8 overflow-hidden">
-      {/* Outside Desktop Controls (Visible on large screens) */}
-      <DesktopControls
-        settings={settings}
-        onUpdateSettings={updateSettings}
-        isLandscape={isLandscape}
-        onToggleLandscape={() => setIsLandscape(!isLandscape)}
-        onResetEmulator={handleResetEmulator}
-        onOpenPowerMenu={() => setPowerMenuOpen(true)}
-      />
-
-      {/* Main Android Phone Chassis */}
-      <PhoneFrame
-        settings={settings}
-        isScreenOn={isScreenOn}
-        onPowerClick={() => setIsScreenOn(!isScreenOn)}
-        onPowerLongPress={() => setPowerMenuOpen(true)}
-        onVolumeUp={handleVolumeUp}
-        onVolumeDown={handleVolumeDown}
-        isLandscape={isLandscape}
+    <main className="w-full min-h-screen bg-black flex items-center justify-center p-0 overflow-hidden">
+      {/* Direct Clean Android Viewport (No outer phone chassis, exact screen presentation) */}
+      <div
+        className="w-full h-screen max-w-lg mx-auto relative flex flex-col justify-between overflow-hidden bg-black text-white shadow-2xl"
+        style={{
+          filter: `brightness(${settings.brightness}%)`,
+        }}
       >
-        {/* Android Screen Container */}
-        <div className="w-full h-full relative flex flex-col justify-between overflow-hidden bg-black text-white">
-          {/* Flashlight Screen Glow Effect */}
-          {settings.flashlightEnabled && (
-            <div className="absolute inset-0 bg-amber-100/30 z-30 pointer-events-none animate-pulse" />
+        {/* Flashlight Screen Glow Effect */}
+        {settings.flashlightEnabled && (
+          <div className="absolute inset-0 bg-amber-100/30 z-30 pointer-events-none animate-pulse" />
+        )}
+
+        {/* Top Status Bar */}
+        <StatusBar
+          settings={settings}
+          onOpenShade={() => {
+            sounds.playTap();
+            setShadeOpen(true);
+          }}
+        />
+
+        {/* Main Operating Screen Content */}
+        <div className="flex-1 relative overflow-hidden flex flex-col">
+          {isLocked ? (
+            <LockScreen
+              settings={settings}
+              onUnlock={() => setIsLocked(false)}
+              onOpenApp={openApp}
+              notifications={notifications}
+              onToggleFlashlight={() =>
+                updateSettings({ flashlightEnabled: !settings.flashlightEnabled })
+              }
+            />
+          ) : activeAppId ? (
+            renderActiveApp()
+          ) : (
+            <HomeScreen
+              apps={appsList}
+              settings={settings}
+              onOpenApp={openApp}
+              onOpenDrawer={() => {
+                sounds.playTap();
+                setDrawerOpen(true);
+              }}
+              onSearchGoogle={(q) => {
+                openApp("chrome");
+              }}
+            />
           )}
 
-          {/* Top Status Bar */}
-          <StatusBar
+          {/* App Drawer Overlay */}
+          <AppDrawer
+            visible={drawerOpen}
+            onClose={() => setDrawerOpen(false)}
+            apps={appsList}
+            onOpenApp={openApp}
+          />
+
+          {/* Notification Shade / Quick Settings Overlay */}
+          <NotificationShade
+            visible={shadeOpen}
+            onClose={() => setShadeOpen(false)}
             settings={settings}
-            onOpenShade={() => {
-              sounds.playTap();
-              setShadeOpen(true);
+            onUpdateSettings={updateSettings}
+            notifications={notifications}
+            onDismissNotification={(id) =>
+              setNotifications((prev) => prev.filter((n) => n.id !== id))
+            }
+            onClearAllNotifications={() => setNotifications([])}
+            onOpenApp={openApp}
+          />
+
+          {/* Recents App Switcher Overlay */}
+          <RecentsView
+            visible={recentsOpen}
+            openApps={openApps}
+            apps={appsList}
+            activeAppId={activeAppId}
+            onSwitchApp={(id) => {
+              setActiveAppId(id);
+              setRecentsOpen(false);
+            }}
+            onCloseApp={(id) => {
+              setOpenApps((prev) => prev.filter((app) => app !== id));
+              if (activeAppId === id) setActiveAppId(null);
+            }}
+            onClearAll={() => {
+              setOpenApps([]);
+              setActiveAppId(null);
+              setRecentsOpen(false);
+            }}
+            onCloseRecents={() => setRecentsOpen(false)}
+          />
+
+          {/* Power Menu Modal */}
+          <PowerMenu
+            visible={powerMenuOpen}
+            onClose={() => setPowerMenuOpen(false)}
+            onRestart={() => {
+              setPowerMenuOpen(false);
+              setIsScreenOn(false);
+              sounds.playNotification();
+              setTimeout(() => {
+                setIsScreenOn(true);
+                setIsLocked(true);
+              }, 1500);
+            }}
+            onPowerOff={() => {
+              setPowerMenuOpen(false);
+              setIsScreenOn(false);
+            }}
+            onScreenshot={() => {
+              setPowerMenuOpen(false);
+              alert("Screenshot captured and saved to Gallery!");
             }}
           />
 
-          {/* Main Operating Screen Content */}
-          <div className="flex-1 relative overflow-hidden">
-            {isLocked ? (
-              <LockScreen
-                settings={settings}
-                onUnlock={() => setIsLocked(false)}
-                onOpenApp={openApp}
-                notifications={notifications}
-                onToggleFlashlight={() =>
-                  updateSettings({ flashlightEnabled: !settings.flashlightEnabled })
-                }
-              />
-            ) : activeAppId ? (
-              renderActiveApp()
-            ) : (
-              <HomeScreen
-                apps={appsList}
-                settings={settings}
-                onOpenApp={openApp}
-                onOpenDrawer={() => {
-                  sounds.playTap();
-                  setDrawerOpen(true);
-                }}
-                onSearchGoogle={(q) => {
-                  openApp("chrome");
-                }}
-              />
-            )}
-
-            {/* App Drawer Overlay */}
-            <AppDrawer
-              visible={drawerOpen}
-              onClose={() => setDrawerOpen(false)}
-              apps={appsList}
-              onOpenApp={openApp}
-            />
-
-            {/* Notification Shade / Quick Settings Overlay */}
-            <NotificationShade
-              visible={shadeOpen}
-              onClose={() => setShadeOpen(false)}
-              settings={settings}
-              onUpdateSettings={updateSettings}
-              notifications={notifications}
-              onDismissNotification={(id) =>
-                setNotifications((prev) => prev.filter((n) => n.id !== id))
-              }
-              onClearAllNotifications={() => setNotifications([])}
-              onOpenApp={openApp}
-            />
-
-            {/* Recents App Switcher Overlay */}
-            <RecentsView
-              visible={recentsOpen}
-              openApps={openApps}
-              apps={appsList}
-              activeAppId={activeAppId}
-              onSwitchApp={(id) => {
-                setActiveAppId(id);
-                setRecentsOpen(false);
-              }}
-              onCloseApp={(id) => {
-                setOpenApps((prev) => prev.filter((app) => app !== id));
-                if (activeAppId === id) setActiveAppId(null);
-              }}
-              onClearAll={() => {
-                setOpenApps([]);
-                setActiveAppId(null);
-                setRecentsOpen(false);
-              }}
-              onCloseRecents={() => setRecentsOpen(false)}
-            />
-
-            {/* Power Menu Modal */}
-            <PowerMenu
-              visible={powerMenuOpen}
-              onClose={() => setPowerMenuOpen(false)}
-              onRestart={() => {
-                setPowerMenuOpen(false);
-                setIsScreenOn(false);
-                sounds.playNotification();
-                setTimeout(() => {
-                  setIsScreenOn(true);
-                  setIsLocked(true);
-                }, 1500);
-              }}
-              onPowerOff={() => {
-                setPowerMenuOpen(false);
-                setIsScreenOn(false);
-              }}
-              onScreenshot={() => {
-                setPowerMenuOpen(false);
-                alert("Screenshot captured and saved to Gallery!");
-              }}
-            />
-
-            {/* Volume HUD Slider Overlay */}
-            <VolumeHUD
-              volume={settings.volume}
-              visible={volumeHudVisible}
-              onClose={() => setVolumeHudVisible(false)}
-              onVolumeChange={(vol) => updateSettings({ volume: vol })}
-            />
-          </div>
-
-          {/* Bottom Android Navigation Bar */}
-          {!isLocked && (
-            <NavigationBar
-              navStyle={settings.navStyle}
-              onBack={handleBack}
-              onHome={handleHome}
-              onRecents={handleRecents}
-            />
-          )}
+          {/* Volume HUD Slider Overlay */}
+          <VolumeHUD
+            volume={settings.volume}
+            visible={volumeHudVisible}
+            onClose={() => setVolumeHudVisible(false)}
+            onVolumeChange={(vol) => updateSettings({ volume: vol })}
+          />
         </div>
-      </PhoneFrame>
+
+        {/* Bottom Android Navigation Bar */}
+        {!isLocked && (
+          <NavigationBar
+            navStyle={settings.navStyle}
+            onBack={handleBack}
+            onHome={handleHome}
+            onRecents={handleRecents}
+          />
+        )}
+      </div>
     </main>
   );
 }
