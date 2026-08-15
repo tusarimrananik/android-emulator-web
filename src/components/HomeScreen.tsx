@@ -96,7 +96,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <div className="flex items-center space-x-2.5 flex-1 mr-2">
             <img
               src="/img/icon/apps/google.png"
-              alt="Google"
+              alt=""
               className="w-6 h-6 object-contain shrink-0 drop-shadow-sm"
             />
             <input
@@ -118,7 +118,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               className="p-1 hover:opacity-80 transition-opacity"
               title="Voice Search"
             >
-              <img src="/img/icon/apps/mic.png" alt="Mic" className="w-4 h-4 object-contain" />
+              <img src="/img/icon/apps/mic.png" alt="" className="w-4 h-4 object-contain" />
             </button>
             <button
               type="button"
@@ -129,13 +129,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               className="p-1 hover:opacity-80 transition-opacity"
               title="Google Lens"
             >
-              <img src="/img/icon/apps/photos.png" alt="Lens" className="w-4 h-4 object-contain" />
+              <img src="/img/icon/apps/photos.png" alt="" className="w-4 h-4 object-contain" />
             </button>
           </div>
         </form>
       </div>
 
-      {/* Center Section: App Icons Grid (4 columns, Exact Android Icons) */}
+      {/* Center Section: App Icons Grid (Exact Stock Android Grid) */}
       <div className="grid grid-cols-4 gap-y-5 gap-x-3 my-auto px-1">
         {gridApps.map((app) => (
           <button
@@ -146,11 +146,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             }}
             className="flex flex-col items-center space-y-1.5 group active:scale-90 transition-transform"
           >
-            <div className="w-14 h-14 rounded-2xl shadow-xl flex items-center justify-center group-hover:scale-105 transition-all overflow-hidden drop-shadow-md">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-all overflow-hidden drop-shadow-lg">
               <img
                 src={app.iconSrc}
-                alt={app.name}
-                className="w-full h-full object-contain drop-shadow"
+                alt=""
+                className="w-full h-full object-contain"
               />
             </div>
             <span className="text-[11px] font-medium text-white drop-shadow-md truncate w-full text-center px-0.5 tracking-tight">
@@ -174,7 +174,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <ChevronUp className="w-4 h-4 animate-bounce drop-shadow" />
         </button>
 
-        {/* 5-App Bottom Dock (Exact Android Material Dock) */}
+        {/* 5-App Bottom Dock (Exact Android Stock Dock) */}
         <div className="w-full bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-2 px-3 flex items-center justify-around shadow-2xl">
           {dockApps.map((app) => (
             <button
@@ -188,8 +188,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             >
               <img
                 src={app.iconSrc}
-                alt={app.name}
-                className="w-full h-full object-contain drop-shadow"
+                alt=""
+                className="w-full h-full object-contain"
               />
             </button>
           ))}

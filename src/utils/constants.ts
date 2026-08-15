@@ -2,7 +2,7 @@ import { AppDefinition, Contact, DeviceSettings, FileItem, MessageThread, MusicT
 
 export const DEFAULT_SETTINGS: DeviceSettings = {
   darkMode: true,
-  themeColor: "#A8C7FA", // Google Pixel Material Blue
+  themeColor: "#A8C7FA",
   brightness: 95,
   volume: 75,
   wifiEnabled: true,
@@ -23,23 +23,18 @@ export const DEFAULT_SETTINGS: DeviceSettings = {
 export const WALLPAPERS = [
   {
     id: "default-android",
-    name: "Android 15 Stock",
+    name: "Android Stock",
     url: "/img/wallpaper/default.jpg",
   },
   {
     id: "default-android-dark",
-    name: "Pixel Twilight",
+    name: "Android Dark",
     url: "/img/wallpaper/default2.jpg",
   },
   {
     id: "blue-material",
     name: "Material Blue",
     url: "/img/blue.jpg",
-  },
-  {
-    id: "abstract-waves",
-    name: "Material Wave",
-    url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop",
   },
 ];
 
@@ -172,42 +167,10 @@ export const APPS: AppDefinition[] = [
     dock: false,
   },
   {
-    id: "games",
-    name: "Play Games",
-    iconSrc: "/img/icon/apps/playgames.png",
-    category: "games",
-    installed: true,
-    dock: false,
-  },
-  {
     id: "files",
     name: "Files",
     iconSrc: "/img/icon/apps/ssfiles.png",
     category: "google",
-    installed: true,
-    dock: false,
-  },
-  {
-    id: "recorder",
-    name: "Recorder",
-    iconSrc: "/img/icon/apps/ssrecorder.png",
-    category: "tools",
-    installed: true,
-    dock: false,
-  },
-  {
-    id: "music",
-    name: "YT Music",
-    iconSrc: "/img/icon/apps/ssmusic.png",
-    category: "media",
-    installed: true,
-    dock: false,
-  },
-  {
-    id: "termux",
-    name: "Termux",
-    iconSrc: "/img/icon/apps/github.png",
-    category: "tools",
     installed: true,
     dock: false,
   },
@@ -231,9 +194,9 @@ export const INITIAL_MESSAGES: MessageThread[] = [
     unreadCount: 1,
     lastMessageTime: "10:42 AM",
     messages: [
-      { id: "m1", sender: "them", text: "Hello Anik! I am your Android AI Assistant. Ask me anything or type a prompt!", time: "10:40 AM" },
-      { id: "m2", sender: "me", text: "What's the status of the Android emulator?", time: "10:41 AM" },
-      { id: "m3", sender: "them", text: "All Android applications and official stock icons are running smoothly on Android 15!", time: "10:42 AM" },
+      { id: "m1", sender: "them", text: "Hello Anik! I am your Android AI Assistant.", time: "10:40 AM" },
+      { id: "m2", sender: "me", text: "What's the status of the Android system?", time: "10:41 AM" },
+      { id: "m3", sender: "them", text: "All Android stock apps and exact system icons are running on Android 15!", time: "10:42 AM" },
     ],
   },
   {
@@ -244,8 +207,8 @@ export const INITIAL_MESSAGES: MessageThread[] = [
     unreadCount: 0,
     lastMessageTime: "Yesterday",
     messages: [
-      { id: "m4", sender: "them", text: "Hey! Did you check the new Android Material You UI update?", time: "Yesterday" },
-      { id: "m5", sender: "me", text: "Yes, the dynamic themes and smooth gesture navigation are super clean!", time: "Yesterday" },
+      { id: "m4", sender: "them", text: "Hey! Did you check the new Android UI?", time: "Yesterday" },
+      { id: "m5", sender: "me", text: "Yes, the stock icons and gesture navigation are clean!", time: "Yesterday" },
     ],
   },
 ];
@@ -256,7 +219,7 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     appId: "messages",
     appName: "Messages",
     title: "Gemini AI Assistant",
-    message: "All Android applications and official icons are loaded.",
+    message: "Android system is running with official stock assets.",
     time: "Just now",
     unread: true,
   },
@@ -265,37 +228,20 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
     appId: "playstore",
     appName: "Google Play Store",
     title: "Updates Available",
-    message: "4 applications have pending updates available for download.",
+    message: "4 applications have pending updates.",
     time: "15m ago",
     unread: true,
-  },
-  {
-    id: "n3",
-    appId: "photos",
-    appName: "Google Photos",
-    title: "Memories Ready",
-    message: "Rediscover your favorite moments from this week.",
-    time: "1h ago",
-    unread: false,
   },
 ];
 
 export const INITIAL_NOTES: NoteItem[] = [
   {
     id: "note-1",
-    title: "Android 15 Emulator Roadmap",
-    content: "1. Material You dynamic colors\n2. Real camera integration\n3. Full dialer with DTMF tones\n4. Responsive phone frame & full-screen mobile mode\n5. Vercel deployment with zero latency",
-    color: "#FEF08A", // yellow
+    title: "Android System Notes",
+    content: "1. Exact stock system icons\n2. Native Android home screen grid\n3. Pure screen viewport presentation",
+    color: "#FEF08A",
     pinned: true,
     updatedAt: "Today, 11:20 AM",
-  },
-  {
-    id: "note-2",
-    title: "RUET Lab Notes",
-    content: "Algorithm lab report due next Sunday. Review Numerical Methods interpolation formulas.",
-    color: "#BBF7D0", // green
-    pinned: false,
-    updatedAt: "Yesterday",
   },
 ];
 
@@ -304,9 +250,6 @@ export const INITIAL_FILES: FileItem[] = [
   { id: "f2", name: "Downloads", size: "5 items", type: "folder", date: "Aug 15, 2026" },
   { id: "f3", name: "Documents", size: "2 items", type: "folder", date: "Aug 14, 2026" },
   { id: "f4", name: "Music", size: "4 items", type: "folder", date: "Aug 13, 2026" },
-  { id: "f5", name: "android_wallpaper_4k.jpg", size: "3.4 MB", type: "image", date: "Today", url: "/img/wallpaper/default.jpg" },
-  { id: "f6", name: "lab_report_final.pdf", size: "1.2 MB", type: "doc", date: "Yesterday" },
-  { id: "f7", name: "synthwave_dream.mp3", size: "5.8 MB", type: "audio", date: "Aug 12, 2026" },
 ];
 
 export const INITIAL_MUSIC: MusicTrack[] = [
@@ -318,23 +261,5 @@ export const INITIAL_MUSIC: MusicTrack[] = [
     duration: "3:45",
     durationSec: 225,
     coverUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    id: "m2",
-    title: "Chill Horizon Beats",
-    artist: "Lofi Cafe",
-    album: "Study & Relax Vol. 4",
-    duration: "2:50",
-    durationSec: 170,
-    coverUrl: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=400&auto=format&fit=crop",
-  },
-  {
-    id: "m3",
-    title: "Silicon Drive",
-    artist: "Cyber Pulse",
-    album: "Neon Grid",
-    duration: "4:12",
-    durationSec: 252,
-    coverUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop",
   },
 ];
