@@ -58,7 +58,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
   return (
     <div
-      className="w-full h-full flex flex-col justify-between p-4 pt-10 pb-2 select-none overflow-hidden"
+      className="w-full h-full flex flex-col justify-between p-4 pt-10 pb-6 select-none overflow-hidden"
       style={{
         backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.35)), url(${settings.wallpaper})`,
         backgroundSize: "cover",
@@ -136,7 +136,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       </div>
 
       {/* Center Section: App Icons Grid (Stock Android Layout) */}
-      <div className="grid grid-cols-4 gap-y-5 gap-x-3 my-auto px-1">
+      <div className="grid grid-cols-4 gap-y-4 gap-x-3 my-auto px-1">
         {gridApps.map((app) => (
           <button
             key={app.id}
@@ -144,9 +144,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               sounds.playTap();
               onOpenApp(app.id);
             }}
-            className="flex flex-col items-center space-y-1.5 group active:scale-90 transition-transform"
+            className="flex flex-col items-center space-y-1 group active:scale-90 transition-transform"
           >
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-all overflow-hidden drop-shadow-md">
+            <div className="w-13 h-13 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-all overflow-hidden drop-shadow-md">
               <img
                 src={app.iconSrc}
                 alt=""
@@ -160,8 +160,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         ))}
       </div>
 
-      {/* Bottom Section: Swipe Up Arrow & Clean Dock (No frosted container) */}
-      <div className="space-y-3">
+      {/* Bottom Section: Swipe Up Arrow & Clean Dock (Proper bottom spacing) */}
+      <div className="space-y-2 pb-2">
         {/* Swipe up for App Drawer indicator */}
         <button
           onClick={() => {
@@ -183,7 +183,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 sounds.playTap();
                 onOpenApp(app.id);
               }}
-              className="w-13 h-13 flex items-center justify-center active:scale-90 hover:scale-105 transition-all overflow-hidden drop-shadow-lg"
+              className="w-12 h-12 flex items-center justify-center active:scale-90 hover:scale-105 transition-all overflow-hidden drop-shadow-lg"
               title={app.name}
             >
               <img

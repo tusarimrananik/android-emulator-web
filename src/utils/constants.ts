@@ -128,7 +128,7 @@ export const APPS: AppDefinition[] = [
   },
   {
     id: "clock",
-    name: "Clock",
+    name: "Calendar",
     iconSrc: "/img/icon/apps/calender.png",
     category: "system",
     installed: true,
