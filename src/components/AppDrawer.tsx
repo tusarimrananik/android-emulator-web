@@ -1,29 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Search,
-  ChevronDown,
-  Phone,
-  MessageSquare,
-  Compass,
-  Camera,
-  ShoppingBag,
-  Image as ImageIcon,
-  Settings,
-  Calculator,
-  Clock,
-  Folder,
-  Music,
-  Gamepad2,
-  StickyNote,
-  Tv,
-  Terminal,
-  Mic,
-  X,
-} from "lucide-react";
+import { Search, ChevronDown, X, ShoppingBag } from "lucide-react";
 import { AppDefinition, AppId } from "@/types/android";
 import { sounds } from "@/utils/soundEffects";
+import { getAppIconComponent } from "@/components/HomeScreen";
 
 interface AppDrawerProps {
   visible: boolean;
@@ -31,25 +12,6 @@ interface AppDrawerProps {
   apps: AppDefinition[];
   onOpenApp: (appId: AppId) => void;
 }
-
-const ICON_MAP: Record<string, React.ElementType> = {
-  Phone,
-  MessageSquare,
-  Compass,
-  Camera,
-  ShoppingBag,
-  Image: ImageIcon,
-  Settings,
-  Calculator,
-  Clock,
-  Folder,
-  Music,
-  Gamepad2,
-  StickyNote,
-  Tv,
-  Terminal,
-  Mic,
-};
 
 export const AppDrawer: React.FC<AppDrawerProps> = ({
   visible,
@@ -121,9 +83,9 @@ export const AppDrawer: React.FC<AppDrawerProps> = ({
               sounds.playTap();
               setSelectedCategory(cat.id);
             }}
-            className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+            className={`px-3.5 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
               selectedCategory === cat.id
-                ? "bg-blue-500 text-zinc-950 font-bold"
+                ? "bg-blue-500 text-zinc-950 font-bold shadow-md"
                 : "bg-zinc-900 border border-white/5 text-zinc-400 hover:text-white"
             }`}
           >
@@ -151,29 +113,24 @@ export const AppDrawer: React.FC<AppDrawerProps> = ({
           </div>
         ) : (
           <div className="grid grid-cols-4 gap-y-5 gap-x-2">
-            {filteredApps.map((app) => {
-              const Icon = ICON_MAP[app.iconName] || ShoppingBag;
-              return (
-                <button
-                  key={app.id}
-                  onClick={() => {
-                    sounds.playTap();
-                    onOpenApp(app.id);
-                    onClose();
-                  }}
-                  className="flex flex-col items-center space-y-1.5 group active:scale-90 transition-transform"
-                >
-                  <div
-                    className={`w-12 h-12 rounded-2xl ${app.bgColor} ${app.textColor} shadow-md flex items-center justify-center border border-white/10 group-hover:scale-105 transition-all`}
-                  >
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <span className="text-[11px] font-medium text-zinc-300 truncate w-full text-center px-0.5">
-                    {app.name}
-                  </span>
-                </button>
-              );
-            })}
+            {filteredApps.map((app) => (
+              <button
+                key={app.id}
+                onClick={() => {
+                  sounds.playTap();
+                  onOpenApp(app.id);
+                  onClose();
+                }}
+                className="flex flex-col items-center space-y-1.5 group active:scale-90 transition-transform"
+              >
+                <div className="w-13 h-13 rounded-2xl shadow-md flex items-center justify-center group-hover:scale-105 transition-all overflow-hidden drop-shadow">
+                  {getAppIconComponent(app.id, "w-13 h-13")}
+                </div>
+                <span className="text-[11px] font-medium text-zinc-300 truncate w-full text-center px-0.5">
+                  {app.name}
+                </span>
+              </button>
+            ))}
           </div>
         )}
       </div>
