@@ -3,7 +3,7 @@ import { AppDefinition, Contact, DeviceSettings, FileItem, MessageThread, MusicT
 export const DEFAULT_SETTINGS: DeviceSettings = {
   darkMode: true,
   themeColor: "#A8C7FA", // Google Pixel Material Blue
-  brightness: 90,
+  brightness: 95,
   volume: 75,
   wifiEnabled: true,
   bluetoothEnabled: true,
@@ -41,16 +41,6 @@ export const WALLPAPERS = [
     name: "Material Wave",
     url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop",
   },
-  {
-    id: "mountain-dusk",
-    name: "Mountain Dusk",
-    url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000&auto=format&fit=crop",
-  },
-  {
-    id: "neon-cyber",
-    name: "Neon Glow",
-    url: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop",
-  },
 ];
 
 export const THEME_COLORS = [
@@ -58,8 +48,6 @@ export const THEME_COLORS = [
   { name: "Coral Sunset", value: "#F28B82", darkSurface: "#2C1E20", accent: "#E57373" },
   { name: "Mint Emerald", value: "#81C995", darkSurface: "#1D2821", accent: "#66BB6A" },
   { name: "Material Violet", value: "#D0BCFF", darkSurface: "#272130", accent: "#B388FF" },
-  { name: "Sun Amber", value: "#FDD663", darkSurface: "#2B2619", accent: "#FFD54F" },
-  { name: "Teal Lagoon", value: "#7BD0C1", darkSurface: "#1B2726", accent: "#4DB6AC" },
 ];
 
 export const APPS: AppDefinition[] = [
@@ -136,18 +124,10 @@ export const APPS: AppDefinition[] = [
     dock: false,
   },
   {
-    id: "music",
-    name: "YT Music",
-    iconSrc: "/img/icon/apps/ssmusic.png",
-    category: "media",
-    installed: true,
-    dock: false,
-  },
-  {
-    id: "drive",
-    name: "Drive",
-    iconSrc: "/img/icon/apps/drive.png",
-    category: "google",
+    id: "settings",
+    name: "Settings",
+    iconSrc: "/img/icon/apps/settings.png",
+    category: "system",
     installed: true,
     dock: false,
   },
@@ -168,17 +148,9 @@ export const APPS: AppDefinition[] = [
     dock: false,
   },
   {
-    id: "settings",
-    name: "Settings",
-    iconSrc: "/img/icon/apps/settings.png",
-    category: "system",
-    installed: true,
-    dock: false,
-  },
-  {
-    id: "files",
-    name: "Files",
-    iconSrc: "/img/icon/apps/ssfiles.png",
+    id: "drive",
+    name: "Drive",
+    iconSrc: "/img/icon/apps/drive.png",
     category: "google",
     installed: true,
     dock: false,
@@ -192,10 +164,26 @@ export const APPS: AppDefinition[] = [
     dock: false,
   },
   {
+    id: "contacts",
+    name: "Contacts",
+    iconSrc: "/img/icon/apps/contacts.png",
+    category: "google",
+    installed: true,
+    dock: false,
+  },
+  {
     id: "games",
     name: "Play Games",
     iconSrc: "/img/icon/apps/playgames.png",
     category: "games",
+    installed: true,
+    dock: false,
+  },
+  {
+    id: "files",
+    name: "Files",
+    iconSrc: "/img/icon/apps/ssfiles.png",
+    category: "google",
     installed: true,
     dock: false,
   },
@@ -208,10 +196,10 @@ export const APPS: AppDefinition[] = [
     dock: false,
   },
   {
-    id: "contacts",
-    name: "Contacts",
-    iconSrc: "/img/icon/apps/contacts.png",
-    category: "google",
+    id: "music",
+    name: "YT Music",
+    iconSrc: "/img/icon/apps/ssmusic.png",
+    category: "media",
     installed: true,
     dock: false,
   },
@@ -245,7 +233,7 @@ export const INITIAL_MESSAGES: MessageThread[] = [
     messages: [
       { id: "m1", sender: "them", text: "Hello Anik! I am your Android AI Assistant. Ask me anything or type a prompt!", time: "10:40 AM" },
       { id: "m2", sender: "me", text: "What's the status of the Android emulator?", time: "10:41 AM" },
-      { id: "m3", sender: "them", text: "All Android stock apps and official icons are running smoothly on Android 15!", time: "10:42 AM" },
+      { id: "m3", sender: "them", text: "All Android applications and official stock icons are running smoothly on Android 15!", time: "10:42 AM" },
     ],
   },
   {
