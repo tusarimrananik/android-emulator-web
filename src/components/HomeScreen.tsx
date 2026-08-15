@@ -58,27 +58,27 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
   return (
     <div
-      className="w-full h-full flex flex-col justify-between p-4 pt-10 pb-6 select-none overflow-hidden"
+      className="w-full h-full flex flex-col justify-between p-4 pt-8 pb-3 select-none overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.35)), url(${settings.wallpaper})`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url(${settings.wallpaper})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
       {/* Top Section: Pixel At-a-Glance Widget & Google Search */}
-      <div className="space-y-4">
+      <div className="space-y-3">
         {/* At a Glance Widget */}
         <div
           onClick={() => {
             sounds.playTap();
             onOpenApp("clock");
           }}
-          className="flex flex-col text-white cursor-pointer px-2 pt-2 transition-transform active:scale-98"
+          className="flex flex-col text-white cursor-pointer px-2 pt-1 transition-transform active:scale-98"
         >
           <div className="flex items-center space-x-2 text-4xl font-semibold tracking-tight font-android-clock drop-shadow-md">
             <span>{time || "12:00"}</span>
           </div>
-          <div className="flex items-center space-x-2 text-sm font-medium text-white/95 drop-shadow-md mt-1">
+          <div className="flex items-center space-x-2 text-sm font-medium text-white/95 drop-shadow-md mt-0.5">
             <span>{date || "Sat, Aug 15"}</span>
             <span>•</span>
             <span className="flex items-center space-x-1">
@@ -97,7 +97,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             <img
               src="/img/icon/apps/google.png"
               alt=""
-              className="w-6 h-6 object-contain shrink-0 drop-shadow-sm"
+              className="w-5 h-5 object-contain shrink-0 drop-shadow-sm"
             />
             <input
               type="text"
@@ -135,7 +135,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </form>
       </div>
 
-      {/* Center Section: App Icons Grid (Stock Android Layout) */}
+      {/* Center Section: App Icons Grid (2 rows x 4 columns) */}
       <div className="grid grid-cols-4 gap-y-4 gap-x-3 my-auto px-1">
         {gridApps.map((app) => (
           <button
@@ -160,8 +160,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         ))}
       </div>
 
-      {/* Bottom Section: Swipe Up Arrow & Clean Dock (Proper bottom spacing) */}
-      <div className="space-y-2 pb-2">
+      {/* Bottom Section: Swipe Up Arrow & Clean 5-Icon Dock */}
+      <div className="space-y-1.5 pb-1">
         {/* Swipe up for App Drawer indicator */}
         <button
           onClick={() => {
@@ -174,8 +174,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <ChevronUp className="w-4 h-4 animate-bounce drop-shadow" />
         </button>
 
-        {/* 5-App Bottom Dock (Clean Stock Android Style) */}
-        <div className="w-full flex items-center justify-around px-2 py-1">
+        {/* 5-App Bottom Dock */}
+        <div className="w-full flex items-center justify-around px-2 py-0.5">
           {dockApps.map((app) => (
             <button
               key={app.id}

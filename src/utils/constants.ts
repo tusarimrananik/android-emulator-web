@@ -46,6 +46,7 @@ export const THEME_COLORS = [
 ];
 
 export const APPS: AppDefinition[] = [
+  // 5 Dock Apps
   {
     id: "phone",
     name: "Phone",
@@ -86,6 +87,8 @@ export const APPS: AppDefinition[] = [
     installed: true,
     dock: true,
   },
+
+  // 8 Main Home Screen Apps (2 rows x 4 columns)
   {
     id: "photos",
     name: "Photos",
@@ -119,22 +122,6 @@ export const APPS: AppDefinition[] = [
     dock: false,
   },
   {
-    id: "settings",
-    name: "Settings",
-    iconSrc: "/img/icon/apps/settings.png",
-    category: "system",
-    installed: true,
-    dock: false,
-  },
-  {
-    id: "clock",
-    name: "Calendar",
-    iconSrc: "/img/icon/apps/calender.png",
-    category: "system",
-    installed: true,
-    dock: false,
-  },
-  {
     id: "drive",
     name: "Drive",
     iconSrc: "/img/icon/apps/drive.png",
@@ -151,10 +138,10 @@ export const APPS: AppDefinition[] = [
     dock: false,
   },
   {
-    id: "contacts",
-    name: "Contacts",
-    iconSrc: "/img/icon/apps/contacts.png",
-    category: "google",
+    id: "clock",
+    name: "Calendar",
+    iconSrc: "/img/icon/apps/calender.png",
+    category: "system",
     installed: true,
     dock: false,
   },
@@ -163,6 +150,40 @@ export const APPS: AppDefinition[] = [
     name: "Play Games",
     iconSrc: "/img/icon/apps/playgames.png",
     category: "games",
+    installed: true,
+    dock: false,
+  },
+
+  // Drawer Only Apps
+  {
+    id: "settings",
+    name: "Settings",
+    iconSrc: "/img/icon/apps/settings.png",
+    category: "system",
+    installed: true,
+    dock: false,
+  },
+  {
+    id: "contacts",
+    name: "Contacts",
+    iconSrc: "/img/icon/apps/contacts.png",
+    category: "google",
+    installed: true,
+    dock: false,
+  },
+  {
+    id: "calculator",
+    name: "Calculator",
+    iconSrc: "/img/icon/apps/sscalculator.png",
+    category: "tools",
+    installed: true,
+    dock: false,
+  },
+  {
+    id: "files",
+    name: "Files",
+    iconSrc: "/img/icon/apps/ssfiles.png",
+    category: "google",
     installed: true,
     dock: false,
   },
