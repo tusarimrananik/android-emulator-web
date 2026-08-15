@@ -60,7 +60,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     <div
       className="w-full h-full flex flex-col justify-between p-4 pt-10 pb-2 select-none overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url(${settings.wallpaper})`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.35)), url(${settings.wallpaper})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -135,7 +135,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </form>
       </div>
 
-      {/* Center Section: App Icons Grid (Exact Stock Android Grid) */}
+      {/* Center Section: App Icons Grid (Stock Android Layout) */}
       <div className="grid grid-cols-4 gap-y-5 gap-x-3 my-auto px-1">
         {gridApps.map((app) => (
           <button
@@ -146,7 +146,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             }}
             className="flex flex-col items-center space-y-1.5 group active:scale-90 transition-transform"
           >
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-all overflow-hidden drop-shadow-lg">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-all overflow-hidden drop-shadow-md">
               <img
                 src={app.iconSrc}
                 alt=""
@@ -160,7 +160,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         ))}
       </div>
 
-      {/* Bottom Section: Swipe Up Arrow & Dock */}
+      {/* Bottom Section: Swipe Up Arrow & Clean Dock (No frosted container) */}
       <div className="space-y-3">
         {/* Swipe up for App Drawer indicator */}
         <button
@@ -174,8 +174,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <ChevronUp className="w-4 h-4 animate-bounce drop-shadow" />
         </button>
 
-        {/* 5-App Bottom Dock (Exact Android Stock Dock) */}
-        <div className="w-full bg-white/20 backdrop-blur-xl border border-white/20 rounded-3xl p-2 px-3 flex items-center justify-around shadow-2xl">
+        {/* 5-App Bottom Dock (Clean Stock Android Style) */}
+        <div className="w-full flex items-center justify-around px-2 py-1">
           {dockApps.map((app) => (
             <button
               key={app.id}
@@ -183,7 +183,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 sounds.playTap();
                 onOpenApp(app.id);
               }}
-              className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg active:scale-90 hover:scale-105 transition-all overflow-hidden drop-shadow"
+              className="w-13 h-13 flex items-center justify-center active:scale-90 hover:scale-105 transition-all overflow-hidden drop-shadow-lg"
               title={app.name}
             >
               <img
