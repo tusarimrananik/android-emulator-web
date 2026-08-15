@@ -4,27 +4,6 @@ import React, { useState, useEffect } from "react";
 import { CloudSun, ChevronUp } from "lucide-react";
 import { AppDefinition, AppId, DeviceSettings } from "@/types/android";
 import { sounds } from "@/utils/soundEffects";
-import {
-  GoogleLogoIcon,
-  GoogleMicIcon,
-  GoogleLensIcon,
-  ChromeIcon,
-  PlayStoreIcon,
-  GooglePhotosIcon,
-  AndroidPhoneIcon,
-  AndroidMessagesIcon,
-  AndroidCameraIcon,
-  AndroidSettingsIcon,
-  AndroidCalculatorIcon,
-  AndroidClockIcon,
-  AndroidFilesIcon,
-  AndroidYTMusicIcon,
-  AndroidKeepIcon,
-  AndroidGamesIcon,
-  AndroidRecorderIcon,
-  AndroidYouTubeIcon,
-  AndroidTermuxIcon,
-} from "@/components/AndroidIcons";
 
 interface HomeScreenProps {
   apps: AppDefinition[];
@@ -33,45 +12,6 @@ interface HomeScreenProps {
   onOpenDrawer: () => void;
   onSearchGoogle: (query?: string) => void;
 }
-
-export const getAppIconComponent = (id: string, className = "w-full h-full") => {
-  switch (id) {
-    case "phone":
-      return <AndroidPhoneIcon className={className} />;
-    case "messages":
-      return <AndroidMessagesIcon className={className} />;
-    case "chrome":
-      return <ChromeIcon className={className} />;
-    case "camera":
-      return <AndroidCameraIcon className={className} />;
-    case "playstore":
-      return <PlayStoreIcon className={className} />;
-    case "photos":
-      return <GooglePhotosIcon className={className} />;
-    case "settings":
-      return <AndroidSettingsIcon className={className} />;
-    case "calculator":
-      return <AndroidCalculatorIcon className={className} />;
-    case "clock":
-      return <AndroidClockIcon className={className} />;
-    case "files":
-      return <AndroidFilesIcon className={className} />;
-    case "music":
-      return <AndroidYTMusicIcon className={className} />;
-    case "games":
-      return <AndroidGamesIcon className={className} />;
-    case "notes":
-      return <AndroidKeepIcon className={className} />;
-    case "recorder":
-      return <AndroidRecorderIcon className={className} />;
-    case "youtube":
-      return <AndroidYouTubeIcon className={className} />;
-    case "termux":
-      return <AndroidTermuxIcon className={className} />;
-    default:
-      return <PlayStoreIcon className={className} />;
-  }
-};
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({
   apps,
@@ -120,7 +60,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     <div
       className="w-full h-full flex flex-col justify-between p-4 pt-10 pb-2 select-none overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.45)), url(${settings.wallpaper})`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url(${settings.wallpaper})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -151,10 +91,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         {/* Official Google Search Bar Widget */}
         <form
           onSubmit={handleSearchSubmit}
-          className="w-full bg-white/90 backdrop-blur-md rounded-full px-3.5 py-2.5 flex items-center justify-between shadow-xl text-zinc-900 group focus-within:bg-white transition-all"
+          className="w-full bg-white/95 backdrop-blur-md rounded-full px-3.5 py-2.5 flex items-center justify-between shadow-xl text-zinc-900 group focus-within:bg-white transition-all"
         >
           <div className="flex items-center space-x-2.5 flex-1 mr-2">
-            <GoogleLogoIcon className="w-5 h-5 shrink-0" />
+            <img
+              src="/img/icon/apps/google.png"
+              alt="Google"
+              className="w-6 h-6 object-contain shrink-0 drop-shadow-sm"
+            />
             <input
               type="text"
               placeholder="Search or type URL"
@@ -171,10 +115,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 sounds.playTap();
                 onSearchGoogle("voice");
               }}
-              className="p-1 text-zinc-600 hover:text-zinc-900 transition-colors"
+              className="p-1 hover:opacity-80 transition-opacity"
               title="Voice Search"
             >
-              <GoogleMicIcon className="w-4 h-4" />
+              <img src="/img/icon/apps/mic.png" alt="Mic" className="w-4 h-4 object-contain" />
             </button>
             <button
               type="button"
@@ -182,16 +126,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 sounds.playTap();
                 onOpenApp("camera");
               }}
-              className="p-1 text-zinc-600 hover:text-zinc-900 transition-colors"
+              className="p-1 hover:opacity-80 transition-opacity"
               title="Google Lens"
             >
-              <GoogleLensIcon className="w-4 h-4" />
+              <img src="/img/icon/apps/photos.png" alt="Lens" className="w-4 h-4 object-contain" />
             </button>
           </div>
         </form>
       </div>
 
-      {/* Center Section: App Icons Grid (4 columns, Android Squircles) */}
+      {/* Center Section: App Icons Grid (4 columns, Exact Android Icons) */}
       <div className="grid grid-cols-4 gap-y-5 gap-x-3 my-auto px-1">
         {gridApps.map((app) => (
           <button
@@ -203,7 +147,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             className="flex flex-col items-center space-y-1.5 group active:scale-90 transition-transform"
           >
             <div className="w-14 h-14 rounded-2xl shadow-xl flex items-center justify-center group-hover:scale-105 transition-all overflow-hidden drop-shadow-md">
-              {getAppIconComponent(app.id, "w-full h-full")}
+              <img
+                src={app.iconSrc}
+                alt={app.name}
+                className="w-full h-full object-contain drop-shadow"
+              />
             </div>
             <span className="text-[11px] font-medium text-white drop-shadow-md truncate w-full text-center px-0.5 tracking-tight">
               {app.name}
@@ -238,7 +186,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg active:scale-90 hover:scale-105 transition-all overflow-hidden drop-shadow"
               title={app.name}
             >
-              {getAppIconComponent(app.id, "w-full h-full")}
+              <img
+                src={app.iconSrc}
+                alt={app.name}
+                className="w-full h-full object-contain drop-shadow"
+              />
             </button>
           ))}
         </div>

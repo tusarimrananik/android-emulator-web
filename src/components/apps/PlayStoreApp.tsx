@@ -8,9 +8,6 @@ import {
   Check,
   ShoppingBag,
   Sparkles,
-  Gamepad2,
-  Layers,
-  ArrowRight,
 } from "lucide-react";
 import { AppDefinition, AppId } from "@/types/android";
 import { sounds } from "@/utils/soundEffects";
@@ -38,7 +35,7 @@ export const PlayStoreApp: React.FC<PlayStoreAppProps> = ({
       rating: "4.8",
       size: "24 MB",
       category: "Games",
-      iconColor: "bg-emerald-600",
+      iconSrc: "/img/icon/apps/playgames.png",
       description: "Play classic Flappy Droid, 2048 puzzle, Snake & Tic-Tac-Toe offline!",
     },
     {
@@ -48,7 +45,7 @@ export const PlayStoreApp: React.FC<PlayStoreAppProps> = ({
       rating: "4.9",
       size: "48 MB",
       category: "Tools",
-      iconColor: "bg-black text-emerald-400",
+      iconSrc: "/img/icon/apps/github.png",
       description: "Powerful terminal emulation and Linux environment for Android.",
     },
     {
@@ -58,7 +55,7 @@ export const PlayStoreApp: React.FC<PlayStoreAppProps> = ({
       rating: "4.7",
       size: "32 MB",
       category: "Media",
-      iconColor: "bg-red-600",
+      iconSrc: "/img/icon/apps/ssmusic.png",
       description: "Official music streaming service with curated playlists and synthwave tracks.",
     },
     {
@@ -68,7 +65,7 @@ export const PlayStoreApp: React.FC<PlayStoreAppProps> = ({
       rating: "4.9",
       size: "18 MB",
       category: "Productivity",
-      iconColor: "bg-amber-400 text-zinc-900",
+      iconSrc: "/img/icon/apps/keep.png",
       description: "Quickly capture what's on your mind with color tags and pin notes.",
     },
     {
@@ -78,7 +75,7 @@ export const PlayStoreApp: React.FC<PlayStoreAppProps> = ({
       rating: "4.8",
       size: "12 MB",
       category: "Tools",
-      iconColor: "bg-red-500",
+      iconSrc: "/img/icon/apps/ssrecorder.png",
       description: "Record audio with real-time waveform visualizer.",
     },
     {
@@ -88,7 +85,7 @@ export const PlayStoreApp: React.FC<PlayStoreAppProps> = ({
       rating: "4.6",
       size: "56 MB",
       category: "Media",
-      iconColor: "bg-red-700",
+      iconSrc: "/img/icon/apps/youtube.png",
       description: "Watch your favorite videos, creators, and trending content worldwide.",
     },
   ];
@@ -191,10 +188,8 @@ export const PlayStoreApp: React.FC<PlayStoreAppProps> = ({
                     className="p-3.5 rounded-2xl bg-zinc-900/70 border border-white/5 flex items-center justify-between shadow-sm hover:bg-zinc-850 transition-all"
                   >
                     <div className="flex items-center space-x-3 truncate mr-2">
-                      <div
-                        className={`w-12 h-12 rounded-2xl ${item.iconColor} flex items-center justify-center font-bold text-sm text-white shadow shrink-0`}
-                      >
-                        {item.name[0]}
+                      <div className="w-12 h-12 rounded-2xl overflow-hidden flex items-center justify-center shadow shrink-0">
+                        <img src={item.iconSrc} alt={item.name} className="w-full h-full object-contain" />
                       </div>
                       <div className="flex flex-col truncate">
                         <span className="text-xs font-bold text-white truncate">{item.name}</span>

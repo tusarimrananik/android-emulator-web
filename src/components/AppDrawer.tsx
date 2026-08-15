@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { Search, ChevronDown, X, ShoppingBag } from "lucide-react";
 import { AppDefinition, AppId } from "@/types/android";
 import { sounds } from "@/utils/soundEffects";
-import { getAppIconComponent } from "@/components/HomeScreen";
 
 interface AppDrawerProps {
   visible: boolean;
@@ -124,7 +123,11 @@ export const AppDrawer: React.FC<AppDrawerProps> = ({
                 className="flex flex-col items-center space-y-1.5 group active:scale-90 transition-transform"
               >
                 <div className="w-13 h-13 rounded-2xl shadow-md flex items-center justify-center group-hover:scale-105 transition-all overflow-hidden drop-shadow">
-                  {getAppIconComponent(app.id, "w-13 h-13")}
+                  <img
+                    src={app.iconSrc}
+                    alt={app.name}
+                    className="w-full h-full object-contain drop-shadow"
+                  />
                 </div>
                 <span className="text-[11px] font-medium text-zinc-300 truncate w-full text-center px-0.5">
                   {app.name}

@@ -80,10 +80,8 @@ export const RecentsView: React.FC<RecentsViewProps> = ({
                 {/* Header with App icon, title and Close X */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <div
-                      className={`w-6 h-6 rounded-lg ${app.bgColor} flex items-center justify-center text-[10px] text-white font-bold`}
-                    >
-                      {app.name[0]}
+                    <div className="w-6 h-6 rounded-lg overflow-hidden flex items-center justify-center">
+                      <img src={app.iconSrc} alt={app.name} className="w-full h-full object-contain" />
                     </div>
                     <span className="text-xs font-semibold text-zinc-200">
                       {app.name}
@@ -104,8 +102,8 @@ export const RecentsView: React.FC<RecentsViewProps> = ({
 
                 {/* Simulated Screen Preview Inside Card */}
                 <div className="flex-1 my-3 bg-zinc-950 rounded-2xl border border-white/5 p-3 flex flex-col items-center justify-center space-y-2 text-zinc-500">
-                  <div className={`p-3 rounded-2xl ${app.bgColor} text-white shadow`}>
-                    <Smartphone className="w-6 h-6" />
+                  <div className="w-12 h-12 rounded-2xl overflow-hidden shadow">
+                    <img src={app.iconSrc} alt={app.name} className="w-full h-full object-contain" />
                   </div>
                   <span className="text-[11px] font-medium">{app.name} is running</span>
                 </div>

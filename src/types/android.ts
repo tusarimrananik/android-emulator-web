@@ -14,14 +14,16 @@ export type AppId =
   | "notes"
   | "recorder"
   | "youtube"
-  | "termux";
+  | "termux"
+  | "maps"
+  | "gmail"
+  | "drive"
+  | "contacts";
 
 export interface AppDefinition {
   id: AppId;
   name: string;
-  iconName: string;
-  bgColor: string;
-  textColor: string;
+  iconSrc: string;
   category: "google" | "system" | "media" | "tools" | "games";
   installed: boolean;
   dock: boolean;
