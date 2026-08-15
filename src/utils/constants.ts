@@ -46,7 +46,7 @@ export const THEME_COLORS = [
 ];
 
 export const APPS: AppDefinition[] = [
-  // 5 Dock Apps
+  // 5 Canonical Dock Apps (Bottom Row)
   {
     id: "phone",
     name: "Phone",
@@ -88,7 +88,7 @@ export const APPS: AppDefinition[] = [
     dock: true,
   },
 
-  // 8 Main Home Screen Apps (2 rows x 4 columns)
+  // Exactly 8 Main Home Screen Apps (2 rows x 4 columns)
   {
     id: "photos",
     name: "Photos",
@@ -154,13 +154,13 @@ export const APPS: AppDefinition[] = [
     dock: false,
   },
 
-  // Drawer Only Apps
+  // Drawer Apps (Accessible via swipe up)
   {
     id: "settings",
     name: "Settings",
     iconSrc: "/img/icon/apps/settings.png",
     category: "system",
-    installed: true,
+    installed: false,
     dock: false,
   },
   {
@@ -168,7 +168,7 @@ export const APPS: AppDefinition[] = [
     name: "Contacts",
     iconSrc: "/img/icon/apps/contacts.png",
     category: "google",
-    installed: true,
+    installed: false,
     dock: false,
   },
   {
@@ -176,7 +176,7 @@ export const APPS: AppDefinition[] = [
     name: "Calculator",
     iconSrc: "/img/icon/apps/sscalculator.png",
     category: "tools",
-    installed: true,
+    installed: false,
     dock: false,
   },
   {
@@ -184,7 +184,7 @@ export const APPS: AppDefinition[] = [
     name: "Files",
     iconSrc: "/img/icon/apps/ssfiles.png",
     category: "google",
-    installed: true,
+    installed: false,
     dock: false,
   },
 ];

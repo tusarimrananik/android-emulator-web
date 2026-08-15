@@ -58,15 +58,15 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
   return (
     <div
-      className="w-full h-full flex flex-col justify-between p-4 pt-8 pb-3 select-none overflow-hidden"
+      className="w-full h-full flex flex-col justify-between p-4 pt-6 pb-2 select-none overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url(${settings.wallpaper})`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.25)), url(${settings.wallpaper})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
       {/* Top Section: Pixel At-a-Glance Widget & Google Search */}
-      <div className="space-y-3">
+      <div className="space-y-3.5 pt-2">
         {/* At a Glance Widget */}
         <div
           onClick={() => {
@@ -136,7 +136,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       </div>
 
       {/* Center Section: App Icons Grid (2 rows x 4 columns) */}
-      <div className="grid grid-cols-4 gap-y-4 gap-x-3 my-auto px-1">
+      <div className="grid grid-cols-4 gap-y-6 gap-x-3 my-auto px-1">
         {gridApps.map((app) => (
           <button
             key={app.id}
@@ -161,7 +161,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       </div>
 
       {/* Bottom Section: Swipe Up Arrow & Clean 5-Icon Dock */}
-      <div className="space-y-1.5 pb-1">
+      <div className="space-y-3 pb-3">
         {/* Swipe up for App Drawer indicator */}
         <button
           onClick={() => {
@@ -174,8 +174,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <ChevronUp className="w-4 h-4 animate-bounce drop-shadow" />
         </button>
 
-        {/* 5-App Bottom Dock */}
-        <div className="w-full flex items-center justify-around px-2 py-0.5">
+        {/* 5-App Bottom Dock (Clean Stock Android Style with complete clearance) */}
+        <div className="w-full flex items-center justify-around px-2 py-1">
           {dockApps.map((app) => (
             <button
               key={app.id}
