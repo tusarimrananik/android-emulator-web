@@ -17,11 +17,11 @@ import {
   Pause,
   SkipForward,
   SkipBack,
-  Volume2,
   Trash2,
 } from "lucide-react";
 import { DeviceSettings, NotificationItem } from "@/types/android";
 import { sounds } from "@/utils/soundEffects";
+import { APPS } from "@/utils/constants";
 
 interface NotificationShadeProps {
   visible: boolean;
@@ -139,6 +139,11 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
     },
   ];
 
+  const getAppIconSrc = (appId: string) => {
+    const app = APPS.find((a) => a.id === appId);
+    return app?.iconSrc || "/img/icon/apps/google.png";
+  };
+
   return (
     <div className="absolute inset-0 bg-zinc-950/95 backdrop-blur-xl z-50 flex flex-col text-zinc-100 animate-in slide-in-from-top duration-300 overflow-hidden">
       {/* Top Bar: Time and Quick Controls */}
@@ -241,8 +246,8 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
         {/* Media Player Card */}
         <div className="bg-gradient-to-r from-zinc-900 to-zinc-850 border border-white/10 rounded-2xl p-3.5 flex items-center justify-between shadow-lg">
           <div className="flex items-center space-x-3 truncate">
-            <div className="w-11 h-11 rounded-xl bg-purple-600 flex items-center justify-center text-white shrink-0 overflow-hidden shadow">
-              <span className="text-lg">🎵</span>
+            <div className="w-10 h-10 rounded-xl overflow-hidden shadow shrink-0">
+              <img src="/img/icon/apps/youtube.png" alt="" className="w-full h-full object-contain" />
             </div>
             <div className="flex flex-col truncate">
               <span className="text-xs font-bold text-white truncate">
@@ -324,8 +329,8 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-[10px] font-bold">
-                      {n.appName[0]}
+                    <div className="w-4 h-4 rounded-full overflow-hidden flex items-center justify-center shrink-0">
+                      <img src={getAppIconSrc(n.appId)} alt="" className="w-full h-full object-contain" />
                     </div>
                     <span className="text-xs font-medium text-zinc-400">
                       {n.appName}

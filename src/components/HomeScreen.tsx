@@ -66,14 +66,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       }}
     >
       {/* Top Section: Pixel At-a-Glance Widget & Google Search */}
-      <div className="space-y-3.5 pt-2">
+      <div className="space-y-3 pt-2 px-1">
         {/* At a Glance Widget */}
         <div
           onClick={() => {
             sounds.playTap();
             onOpenApp("clock");
           }}
-          className="flex flex-col text-white cursor-pointer px-2 pt-1 transition-transform active:scale-98"
+          className="flex flex-col text-white cursor-pointer px-1 pt-1 transition-transform active:scale-98"
         >
           <div className="flex items-center space-x-2 text-4xl font-semibold tracking-tight font-android-clock drop-shadow-md">
             <span>{time || "12:00"}</span>
@@ -135,8 +135,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </form>
       </div>
 
-      {/* Center Section: App Icons Grid (2 rows x 4 columns) */}
-      <div className="grid grid-cols-4 gap-y-6 gap-x-3 my-auto px-1">
+      {/* Center Section: App Icons Grid (Proportional Compact Android Icons) */}
+      <div className="grid grid-cols-4 gap-y-5 gap-x-2 my-auto px-2">
         {gridApps.map((app) => (
           <button
             key={app.id}
@@ -144,9 +144,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               sounds.playTap();
               onOpenApp(app.id);
             }}
-            className="flex flex-col items-center space-y-1 group active:scale-90 transition-transform"
+            className="flex flex-col items-center space-y-1.5 group active:scale-90 transition-transform"
           >
-            <div className="w-13 h-13 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-all overflow-hidden drop-shadow-md">
+            <div className="w-11 h-11 rounded-full flex items-center justify-center group-hover:scale-105 transition-all overflow-hidden drop-shadow-md">
               <img
                 src={app.iconSrc}
                 alt=""
@@ -174,8 +174,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <ChevronUp className="w-4 h-4 animate-bounce drop-shadow" />
         </button>
 
-        {/* 5-App Bottom Dock (Clean Stock Android Style with complete clearance) */}
-        <div className="w-full flex items-center justify-around px-2 py-1">
+        {/* 5-App Bottom Dock (Clean Stock Android Style with proportional icon sizing) */}
+        <div className="w-full flex items-center justify-around px-3 py-1">
           {dockApps.map((app) => (
             <button
               key={app.id}
@@ -183,7 +183,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 sounds.playTap();
                 onOpenApp(app.id);
               }}
-              className="w-12 h-12 flex items-center justify-center active:scale-90 hover:scale-105 transition-all overflow-hidden drop-shadow-lg"
+              className="w-11 h-11 flex items-center justify-center active:scale-90 hover:scale-105 transition-all overflow-hidden drop-shadow-md"
               title={app.name}
             >
               <img
