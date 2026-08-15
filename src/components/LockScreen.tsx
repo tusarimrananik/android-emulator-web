@@ -1,9 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Flashlight, Camera, Fingerprint, Lock, CloudSun } from "lucide-react";
+import { CloudSun } from "lucide-react";
 import { DeviceSettings, NotificationItem } from "@/types/android";
 import { sounds } from "@/utils/soundEffects";
+import {
+  AndroidFlashlightIcon,
+  AndroidCameraOutlineIcon,
+  AndroidFingerprintIcon,
+  AndroidLockIcon,
+} from "@/components/AndroidSystemIcons";
 
 interface LockScreenProps {
   settings: DeviceSettings;
@@ -70,7 +76,7 @@ export const LockScreen: React.FC<LockScreenProps> = ({
       {/* Top Lock Indicator */}
       <div className="w-full flex justify-center pt-2">
         <div className="p-2 rounded-full bg-black/30 backdrop-blur-md text-white/90">
-          <Lock className="w-4 h-4" />
+          <AndroidLockIcon className="w-4 h-4" />
         </div>
       </div>
 
@@ -83,7 +89,7 @@ export const LockScreen: React.FC<LockScreenProps> = ({
           <span>{date || "Saturday, August 15"}</span>
           <span>•</span>
           <span className="flex items-center space-x-1">
-            <CloudSun className="w-4 h-4" />
+            <CloudSun className="w-4 h-4 text-amber-300" />
             <span>26°C</span>
           </span>
         </div>
@@ -125,9 +131,9 @@ export const LockScreen: React.FC<LockScreenProps> = ({
           className={`relative p-4 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white transition-transform duration-200 active:scale-90 ${
             isUnlocking ? "animate-ping" : ""
           }`}
-          title="Hold or tap fingerprint to unlock"
+          title="Tap fingerprint to unlock"
         >
-          <Fingerprint className="w-8 h-8 text-blue-300" />
+          <AndroidFingerprintIcon className="w-8 h-8 text-blue-300" />
         </button>
 
         <span className="text-xs text-white/70 font-medium tracking-wide">
@@ -150,7 +156,7 @@ export const LockScreen: React.FC<LockScreenProps> = ({
             }`}
             title="Toggle Flashlight"
           >
-            <Flashlight className="w-5 h-5" />
+            <AndroidFlashlightIcon className="w-5 h-5" />
           </button>
 
           {/* Camera Shortcut */}
@@ -164,7 +170,7 @@ export const LockScreen: React.FC<LockScreenProps> = ({
             className="p-3 rounded-full bg-black/30 backdrop-blur-md border border-white/20 text-white hover:bg-black/50 transition-all"
             title="Open Camera"
           >
-            <Camera className="w-5 h-5" />
+            <AndroidCameraOutlineIcon className="w-5 h-5" />
           </button>
         </div>
       </div>

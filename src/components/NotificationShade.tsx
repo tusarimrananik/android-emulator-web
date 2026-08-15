@@ -2,15 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import {
-  Wifi,
-  Bluetooth,
-  Flashlight,
-  Moon,
-  Sun,
-  RotateCcw,
-  BatteryCharging,
-  Plane,
-  Sliders,
   ChevronUp,
   X,
   Play,
@@ -22,6 +13,18 @@ import {
 import { DeviceSettings, NotificationItem } from "@/types/android";
 import { sounds } from "@/utils/soundEffects";
 import { APPS } from "@/utils/constants";
+import {
+  AndroidWifiIcon,
+  AndroidBluetoothIcon,
+  AndroidFlashlightIcon,
+  AndroidDarkThemeIcon,
+  AndroidDndIcon,
+  AndroidAutoRotateIcon,
+  AndroidBatterySaverIcon,
+  AndroidAirplaneIcon,
+  AndroidSunBrightnessIcon,
+  AndroidSettingsCogIcon,
+} from "@/components/AndroidSystemIcons";
 
 interface NotificationShadeProps {
   visible: boolean;
@@ -74,7 +77,7 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
       id: "wifi",
       label: "Internet",
       subLabel: settings.wifiEnabled ? "Wi-Fi 6 Connected" : "Disabled",
-      icon: Wifi,
+      icon: AndroidWifiIcon,
       active: settings.wifiEnabled,
       onClick: () => onUpdateSettings({ wifiEnabled: !settings.wifiEnabled }),
     },
@@ -82,7 +85,7 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
       id: "bluetooth",
       label: "Bluetooth",
       subLabel: settings.bluetoothEnabled ? "Pixel Buds Pro" : "Off",
-      icon: Bluetooth,
+      icon: AndroidBluetoothIcon,
       active: settings.bluetoothEnabled,
       onClick: () =>
         onUpdateSettings({ bluetoothEnabled: !settings.bluetoothEnabled }),
@@ -91,7 +94,7 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
       id: "flashlight",
       label: "Flashlight",
       subLabel: settings.flashlightEnabled ? "On" : "Off",
-      icon: Flashlight,
+      icon: AndroidFlashlightIcon,
       active: settings.flashlightEnabled,
       onClick: () =>
         onUpdateSettings({ flashlightEnabled: !settings.flashlightEnabled }),
@@ -100,7 +103,7 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
       id: "darkmode",
       label: "Dark theme",
       subLabel: settings.darkMode ? "Always on" : "Off",
-      icon: settings.darkMode ? Moon : Sun,
+      icon: AndroidDarkThemeIcon,
       active: settings.darkMode,
       onClick: () => onUpdateSettings({ darkMode: !settings.darkMode }),
     },
@@ -108,7 +111,7 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
       id: "dnd",
       label: "Do Not Disturb",
       subLabel: settings.dndEnabled ? "Priority only" : "Off",
-      icon: Moon,
+      icon: AndroidDndIcon,
       active: settings.dndEnabled,
       onClick: () => onUpdateSettings({ dndEnabled: !settings.dndEnabled }),
     },
@@ -116,7 +119,7 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
       id: "autorotate",
       label: "Auto-rotate",
       subLabel: settings.autoRotate ? "On" : "Locked",
-      icon: RotateCcw,
+      icon: AndroidAutoRotateIcon,
       active: settings.autoRotate,
       onClick: () => onUpdateSettings({ autoRotate: !settings.autoRotate }),
     },
@@ -124,7 +127,7 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
       id: "batterysaver",
       label: "Battery Saver",
       subLabel: settings.batterySaver ? "On (84%)" : "Off",
-      icon: BatteryCharging,
+      icon: AndroidBatterySaverIcon,
       active: settings.batterySaver,
       onClick: () =>
         onUpdateSettings({ batterySaver: !settings.batterySaver }),
@@ -133,7 +136,7 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
       id: "airplane",
       label: "Airplane mode",
       subLabel: settings.airplaneMode ? "On" : "Off",
-      icon: Plane,
+      icon: AndroidAirplaneIcon,
       active: settings.airplaneMode,
       onClick: () => onUpdateSettings({ airplaneMode: !settings.airplaneMode }),
     },
@@ -149,7 +152,7 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
       {/* Top Bar: Time and Quick Controls */}
       <div className="px-5 pt-8 pb-3 flex items-center justify-between">
         <div className="flex flex-col">
-          <span className="text-2xl font-bold tracking-tight text-white">
+          <span className="text-2xl font-bold tracking-tight text-white font-sans">
             {currentTime}
           </span>
           <span className="text-xs text-zinc-400 font-medium">
@@ -167,7 +170,7 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
             className="p-2.5 rounded-full bg-zinc-800/80 hover:bg-zinc-700 active:scale-95 transition-all text-zinc-300"
             title="Settings"
           >
-            <Sliders className="w-4 h-4" />
+            <AndroidSettingsCogIcon className="w-4 h-4" />
           </button>
           <button
             onClick={() => {
@@ -185,7 +188,7 @@ export const NotificationShade: React.FC<NotificationShadeProps> = ({
       {/* Brightness Slider */}
       <div className="px-5 py-2">
         <div className="flex items-center space-x-3 bg-zinc-900/80 rounded-2xl p-3 border border-white/5">
-          <Sun className="w-5 h-5 text-amber-400 shrink-0" />
+          <AndroidSunBrightnessIcon className="w-5 h-5 text-amber-400 shrink-0" />
           <input
             type="range"
             min="20"
